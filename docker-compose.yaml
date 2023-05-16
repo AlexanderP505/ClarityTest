@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+        MYSQL_DATABASE: 'metrics_db'
+        MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+        - '3306:3306'
+    command: --init-file /data/application/init.sql
+    expose:
+        - '3306'
+    volumes:
+        - my-db:/var/lib/mysql
+        - ./init.sql:/data/application/init.sql
+
+volumes:
+    my-db:
